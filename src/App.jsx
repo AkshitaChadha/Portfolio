@@ -349,6 +349,8 @@ function App() {
           </div>
         </section>
 
+        <div className="section-fade-divider" aria-hidden="true" />
+
         <section id="about" className="section-shell">
           <Reveal>
             <SectionHeading
@@ -433,7 +435,8 @@ function App() {
           </div>
         </section>
 
-        <section id="projects" className="section-shell">
+        <section id="projects" className="section-shell relative">
+          <div className="projects-section-glow" aria-hidden="true" />
           <Reveal>
             <SectionHeading
               eyebrow="Projects"
