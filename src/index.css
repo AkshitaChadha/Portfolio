@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Instrument Sans', sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background:
+      radial-gradient(circle at top, rgba(76, 29, 149, 0.22), transparent 30%),
+      #020617;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    background:
+      radial-gradient(circle at top, rgba(59, 130, 246, 0.12), transparent 28%),
+      linear-gradient(180deg, #020617 0%, #020617 50%, #030712 100%);
+    color: #e2e8f0;
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button,
+  input,
+  textarea {
+    font: inherit;
+  }
+
+  ::selection {
+    background: rgba(34, 211, 238, 0.3);
+    color: #f8fafc;
+  }
+}
+
+@layer components {
+  .ambient-orb {
+    @apply absolute rounded-full;
+  }
+
+  .grid-pattern {
+    background-image:
+      linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), transparent 82%);
+    @apply absolute inset-0 opacity-40;
+  }
+
+  .nav-link {
+    @apply transition duration-300 hover:text-white;
+  }
+
+  .section-shell {
+    @apply mx-auto max-w-6xl px-5 py-20 sm:px-6 lg:px-8 lg:py-24;
+  }
+
+  .glass-panel {
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.45));
+    box-shadow:
+      0 24px 80px rgba(14, 116, 144, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    @apply relative rounded-[2rem] border border-white/10 backdrop-blur-xl;
+  }
+
+  .section-label {
+    @apply text-xs font-medium tracking-[0.34em] text-cyan-200 uppercase;
+  }
+
+  .cta-primary {
+    box-shadow:
+      0 18px 40px rgba(59, 130, 246, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    @apply inline-flex items-center rounded-full bg-gradient-to-r from-fuchsia-500 via-violet-500 to-cyan-400 px-6 py-3.5 text-sm font-medium text-white transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_60px_rgba(99,102,241,0.3)];
+  }
+
+  .cta-secondary {
+    @apply inline-flex items-center rounded-full border border-white/12 bg-white/6 px-6 py-3.5 text-sm font-medium text-white transition duration-300 hover:-translate-y-0.5 hover:border-cyan-300/40 hover:bg-white/10;
+  }
+
+  .chip {
+    @apply rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-200 transition duration-300 hover:border-cyan-300/30 hover:bg-white/8;
+  }
+
+  .action-button {
+    box-shadow:
+      0 18px 40px rgba(59, 130, 246, 0.14),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    @apply inline-flex items-center rounded-full border border-cyan-300/25 bg-cyan-400/10 px-5 py-2.5 text-sm font-medium text-cyan-100 transition duration-300 hover:-translate-y-0.5 hover:border-cyan-300/45 hover:bg-cyan-400/15;
+  }
+
+  .action-button-secondary {
+    @apply inline-flex items-center rounded-full border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-medium text-slate-100 transition duration-300 hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/8;
+  }
+
+  .project-card {
+    background:
+      radial-gradient(circle at top right, rgba(56, 189, 248, 0.16), transparent 32%),
+      linear-gradient(180deg, rgba(15, 23, 42, 0.82), rgba(15, 23, 42, 0.52));
+    box-shadow:
+      0 32px 80px rgba(2, 6, 23, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    @apply overflow-hidden rounded-[2rem] border border-white/10 p-6 transition duration-500 hover:-translate-y-1 hover:border-cyan-300/30 sm:p-8;
+  }
+
+  .contact-input {
+    @apply w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition duration-300 placeholder:text-slate-500 focus:border-cyan-300/45 focus:bg-white/7 focus:ring-2 focus:ring-cyan-300/20;
+  }
+
+  .carousel-button {
+    @apply flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-slate-950/78 text-2xl leading-none text-white transition duration-300 hover:border-cyan-300/45 hover:text-cyan-100;
+  }
+
+  .thumbnail-button {
+    @apply overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-1 transition duration-300 hover:border-cyan-300/35;
+  }
+
+  .thumbnail-button-active {
+    @apply border-cyan-300/50 bg-cyan-400/10;
+  }
+
+  .demo-image {
+    @apply transition duration-500 group-hover:scale-[1.03];
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
