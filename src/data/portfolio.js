@@ -60,7 +60,7 @@ export const projects = [
     period: 'Real-Time Collaborative Coding Platform',
     tech: ['React', 'Node.js', 'Socket.io', 'Python', 'Streamlit'],
     github: 'https://github.com/AkshitaChadha/CodeVerseAI',
-    live: null,
+    live: 'https://github.com/AkshitaChadha/CodeVerseAI',
     demoType: 'screenshots',
     
     images: [
