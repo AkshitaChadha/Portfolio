@@ -77,7 +77,7 @@
   }
 
   .section-shell {
-    @apply mx-auto max-w-6xl px-5 py-24 sm:px-6 lg:px-8 lg:py-28;
+    @apply mx-auto max-w-6xl px-5 py-24 sm:px-6 lg:px-8 lg:py-30;
   }
 
   .section-fade-divider {
@@ -107,6 +107,12 @@
     text-shadow: 0 0 30px rgba(96, 165, 250, 0.18);
   }
 
+  .hero-underline {
+    background: linear-gradient(90deg, rgba(34, 211, 238, 0.85), rgba(168, 85, 247, 0.75), rgba(59, 130, 246, 0.2));
+    box-shadow: 0 0 24px rgba(96, 165, 250, 0.18);
+    @apply mt-4 h-1.5 w-24 rounded-full;
+  }
+
   .hero-frame {
     box-shadow:
       0 36px 120px rgba(15, 23, 42, 0.45),
@@ -117,19 +123,26 @@
     @apply rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-4 backdrop-blur-md;
   }
 
+  .hero-portrait-shell {
+    box-shadow:
+      0 24px 70px rgba(15, 23, 42, 0.34),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    @apply relative mt-6 overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-b from-white/12 via-white/4 to-transparent;
+  }
+
   .cta-primary {
     box-shadow:
       0 18px 40px rgba(59, 130, 246, 0.18),
       inset 0 1px 0 rgba(255, 255, 255, 0.16);
-    @apply inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-fuchsia-500 via-violet-500 to-cyan-400 px-6 py-3.5 text-sm font-medium text-white transition duration-300 hover:scale-[1.02] hover:-translate-y-0.5 hover:shadow-[0_24px_60px_rgba(99,102,241,0.3)];
+    @apply inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-fuchsia-500 via-violet-500 to-cyan-400 px-6 py-3.5 text-sm font-medium text-white transition duration-300 hover:scale-[1.02] hover:-translate-y-0.5 hover:shadow-[0_24px_60px_rgba(99,102,241,0.3)];
   }
 
   .cta-secondary {
-    @apply inline-flex items-center gap-2.5 rounded-full border border-white/12 bg-white/6 px-6 py-3.5 text-sm font-medium text-white transition duration-300 hover:scale-[1.02] hover:-translate-y-0.5 hover:border-cyan-300/40 hover:bg-white/10;
+    @apply inline-flex items-center justify-center gap-2.5 rounded-full border border-white/12 bg-white/6 px-6 py-3.5 text-sm font-medium text-white transition duration-300 hover:scale-[1.02] hover:-translate-y-0.5 hover:border-cyan-300/40 hover:bg-white/10;
   }
 
   .chip {
-    @apply rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[12px] tracking-[0.02em] text-slate-200 transition duration-300 hover:border-cyan-300/30 hover:bg-white/8;
+    @apply rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[12px] tracking-[0.02em] text-slate-200 transition duration-300 hover:border-cyan-300/35 hover:bg-cyan-400/[0.09] hover:text-white;
   }
 
   .skill-badge {
@@ -144,11 +157,20 @@
     box-shadow:
       0 18px 40px rgba(99, 102, 241, 0.24),
       inset 0 1px 0 rgba(255, 255, 255, 0.14);
-    @apply inline-flex items-center gap-2.5 rounded-full border border-fuchsia-300/20 bg-gradient-to-r from-fuchsia-500 via-violet-500 to-cyan-400 px-5 py-3 text-sm font-medium text-white transition duration-300 hover:scale-[1.04] hover:-translate-y-0.5 hover:shadow-[0_24px_60px_rgba(99,102,241,0.3)];
+    @apply inline-flex items-center gap-2.5 rounded-full border border-fuchsia-300/20 bg-gradient-to-r from-blue-500 via-violet-500 to-fuchsia-500 px-5 py-3 text-sm font-medium text-white transition duration-300 ease-out hover:scale-[1.04] hover:-translate-y-0.5 hover:brightness-110 hover:shadow-[0_24px_60px_rgba(99,102,241,0.3)];
   }
 
   .action-button-secondary {
-    @apply inline-flex items-center gap-2.5 rounded-full border border-white/14 bg-transparent px-5 py-3 text-sm font-medium text-slate-100 transition duration-300 hover:scale-[1.03] hover:-translate-y-0.5 hover:border-cyan-300/30 hover:bg-white/6;
+    @apply inline-flex items-center gap-2.5 rounded-full border border-white/14 bg-transparent px-5 py-3 text-sm font-medium text-slate-100 transition duration-300 ease-out hover:scale-[1.03] hover:-translate-y-0.5 hover:brightness-110 hover:border-cyan-300/30 hover:bg-white/6;
+  }
+
+  .button-icon-wrap {
+    @apply transition duration-300 ease-out;
+  }
+
+  .action-button:hover .button-icon-wrap,
+  .action-button-secondary:hover .button-icon-wrap {
+    transform: translateX(0.25rem);
   }
 
   .project-card {
@@ -162,15 +184,29 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.08),
       inset 0 0 0 1px rgba(255, 255, 255, 0.03),
       inset 0 18px 40px rgba(56, 189, 248, 0.03);
-    @apply overflow-hidden rounded-[2rem] border border-white/10 p-5 backdrop-blur-xl transition duration-500 hover:scale-[1.01] hover:-translate-y-1 hover:border-cyan-300/30 hover:shadow-[0_32px_90px_rgba(8,47,73,0.32)] sm:p-6;
+    @apply relative overflow-hidden rounded-[2rem] border border-white/10 p-5 backdrop-blur-xl transition duration-300 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:border-cyan-300/30 hover:shadow-[0_36px_100px_rgba(30,41,59,0.4)] sm:p-6;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    inset: -20%;
+    background: radial-gradient(circle at top, rgba(59, 130, 246, 0.18), transparent 35%), radial-gradient(circle at right, rgba(168, 85, 247, 0.14), transparent 32%);
+    opacity: 0;
+    transition: opacity 300ms ease;
+    pointer-events: none;
+  }
+
+  .project-card:hover::before {
+    opacity: 1;
   }
 
   .project-card-thumb {
-    @apply relative mb-4 block h-36 overflow-hidden rounded-[1.4rem] border border-white/10 bg-slate-950/70 transition duration-500 hover:border-cyan-300/25;
+    @apply relative mb-4 block h-36 overflow-hidden rounded-[1.4rem] border border-white/10 bg-slate-950/70 transition duration-300 ease-out hover:border-cyan-300/25;
   }
 
   .project-card-thumb-image {
-    @apply h-full w-full object-cover opacity-78 transition duration-500 group-hover:scale-[1.04] group-hover:opacity-90;
+    @apply h-full w-full object-cover opacity-78 transition duration-300 ease-out group-hover:scale-[1.04] group-hover:opacity-90;
   }
 
   .project-card-thumb-overlay {
@@ -182,6 +218,12 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  @media (max-width: 640px) {
+    .section-shell {
+      @apply py-20;
+    }
   }
 
   .achievement-card {

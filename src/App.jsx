@@ -155,7 +155,9 @@ function ActionLink({ href, icon, children, secondary = false, onClick }) {
   if (href) {
     return (
       <a href={href} target="_blank" rel="noreferrer" className={className}>
-        <Glyph type={icon} />
+        <span className="button-icon-wrap">
+          <Glyph type={icon} />
+        </span>
         <span>{children}</span>
       </a>
     )
@@ -163,7 +165,9 @@ function ActionLink({ href, icon, children, secondary = false, onClick }) {
 
   return (
     <button type="button" onClick={onClick} className={className}>
-      <Glyph type={icon} />
+      <span className="button-icon-wrap">
+        <Glyph type={icon} />
+      </span>
       <span>{children}</span>
     </button>
   )
@@ -250,31 +254,65 @@ function App() {
 
       <main>
         <section id="home" className="relative isolate">
-          <div className="mx-auto grid min-h-[calc(100svh-73px)] max-w-6xl items-center gap-14 px-5 py-[4.5rem] sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20 lg:px-8 lg:py-24">
+          <div className="mx-auto grid min-h-[calc(100svh-73px)] max-w-6xl items-center gap-14 px-5 py-[5rem] sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20 lg:px-8 lg:py-24">
             <Motion.div
               initial={reduceMotion ? false : { opacity: 0, y: 32 }}
               animate={reduceMotion ? {} : { opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="max-w-2xl"
+              className="max-w-xl"
             >
-              <p className="mb-5 inline-flex rounded-full border border-white/12 bg-white/6 px-4 py-1.5 text-xs font-medium tracking-[0.3em] text-cyan-200 uppercase shadow-[0_0_0_1px_rgba(255,255,255,0.02)] backdrop-blur">
+              <Motion.p
+                initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+                animate={reduceMotion ? {} : { opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+                className="mb-5 inline-flex rounded-full border border-white/12 bg-white/6 px-4 py-1.5 text-xs font-medium tracking-[0.3em] text-cyan-200 uppercase shadow-[0_0_0_1px_rgba(255,255,255,0.02)] backdrop-blur"
+              >
                 Python Full Stack Developer
-              </p>
-              
-              <h1 className="mt-4 max-w-2xl text-5xl font-semibold tracking-[-0.075em] text-white sm:text-6xl lg:text-[5.25rem] lg:leading-[0.94]">
-                Building full stack products with strong backend foundations.
-              </h1>
-              <p className="mt-6 max-w-xl text-base leading-8 text-slate-300 sm:text-lg">
-                I am a final year Computer Science Engineering student focused on
-                full stack web applications, scalable APIs, and collaborative developer tools that
-                turn complex workflows into polished product experiences.
-              </p>
-              <p className="mt-4 max-w-lg text-sm leading-7 text-slate-400 sm:text-base">
-                I enjoy building reliable Python and Django systems, crafting intuitive user
-                experiences, and communicating ideas clearly on stage as confidently as I do in
-                code reviews.
-              </p>
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+              </Motion.p>
+              <Motion.p
+                initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+                animate={reduceMotion ? {} : { opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+                className="text-3xl font-semibold tracking-[-0.07em] text-white sm:text-4xl lg:text-[2.85rem]"
+              >
+                Hi, I'm{' '}
+                <span className="hero-name bg-gradient-to-r from-cyan-300 via-violet-300 to-fuchsia-300 bg-clip-text text-transparent">
+                  Akshita Chadha
+                </span>
+              </Motion.p>
+              <Motion.div
+                initial={reduceMotion ? false : { opacity: 0, scaleX: 0.7 }}
+                animate={reduceMotion ? {} : { opacity: 1, scaleX: 1 }}
+                transition={{ duration: 0.45, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
+                className="origin-left"
+              >
+                <div className="hero-underline" aria-hidden="true" />
+              </Motion.div>
+              <Motion.h1
+                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+                animate={reduceMotion ? {} : { opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                className="mt-5 max-w-xl text-xl font-semibold leading-snug tracking-[-0.03em] text-white sm:text-2xl lg:text-[2.25rem]"
+              >
+                I build full stack web applications focused on backend systems,
+                scalable APIs, and real-world problem solving.
+              </Motion.h1>
+              <Motion.div
+                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+                animate={reduceMotion ? {} : { opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                className="mt-6 space-y-4"
+              >
+                <p className="max-w-xl text-base leading-8 text-slate-300 sm:text-[1.02rem]">
+                  From real-time collaborative platforms to automated evaluation systems, I enjoy
+                  turning complex workflows into clean, efficient products.
+                </p>
+                <p className="max-w-lg text-sm leading-7 text-slate-400 sm:text-[0.98rem]">
+                  Currently seeking opportunities as a Python Full Stack Developer where I can
+                  contribute, learn, and build impactful solutions.
+                </p>
+              </Motion.div>
+              <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
                 <a href="#projects" className="cta-primary">
                   <Glyph type="image" />
                   <span>View Projects</span>
@@ -300,12 +338,11 @@ function App() {
 
                 <div className="glass-panel hero-frame overflow-hidden px-6 pb-6 pt-5 sm:px-8 sm:pb-8">
                   <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/70 to-transparent" />
-                  <div className="flex items-center justify-between text-xs tracking-[0.3em] text-slate-400 uppercase">
-                    <span>Developer Signal</span>
-                    <span>Available for internships/Full-Time Roles</span>
+                  <div className="text-center text-xs tracking-[0.3em] text-slate-400 uppercase">
+                    <span>Available for internships/full-time roles</span>
                   </div>
 
-                  <div className="relative mt-6 h-[24rem] overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-b from-white/12 via-white/4 to-transparent sm:h-[27rem]">
+                  <div className="hero-portrait-shell h-[24rem] sm:h-[27rem]">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(125,211,252,0.16),transparent_58%)]" />
                     <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent" />
                     <Motion.img
