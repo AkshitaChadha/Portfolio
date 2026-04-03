@@ -12,6 +12,8 @@ import {
   skills,
 } from './data/portfolio'
 
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mqegydav'
+
 const iconMap = {
   email: (
     <path
@@ -180,6 +182,11 @@ function App() {
     email: '',
     message: '',
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState({
+    type: '',
+    message: '',
+  })
   const [selectedProject, setSelectedProject] = useState(null)
   const [activeDemoIndex, setActiveDemoIndex] = useState(0)
   const [openRepoProject, setOpenRepoProject] = useState(null)
@@ -188,15 +195,55 @@ function App() {
     setFormData((current) => ({ ...current, [name]: value }))
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
-    const subject = encodeURIComponent(`Portfolio inquiry from ${formData.name}`)
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`,
-    )
+    if (FORMSPREE_ENDPOINT.includes('YOUR_FORM_ID')) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Add your Formspree endpoint in src/App.jsx to enable direct form delivery.',
+      })
+      return
+    }
 
-    window.location.href = `mailto:akshitachadha01@gmail.com?subject=${subject}&body=${body}`
+    setIsSubmitting(true)
+    setSubmitStatus({ type: '', message: '' })
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Form submission failed')
+      }
+
+      setFormData({
+        name: '',
+        email: '',
+        message: '',
+      })
+      setSubmitStatus({
+        type: 'success',
+        message: 'Message sent successfully. I will get back to you soon.',
+      })
+    } catch {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Something went wrong while sending your message. Please try again.',
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const openProjectDemo = (project) => {
@@ -696,9 +743,20 @@ function App() {
                       placeholder="Tell me about the role, product, or project."
                     />
                   </label>
+                  {submitStatus.message ? (
+                    <p
+                      className={`rounded-2xl border px-4 py-3 text-sm ${
+                        submitStatus.type === 'success'
+                          ? 'border-emerald-400/20 bg-emerald-400/10 text-emerald-200'
+                          : 'border-rose-400/20 bg-rose-400/10 text-rose-200'
+                      }`}
+                    >
+                      {submitStatus.message}
+                    </p>
+                  ) : null}
                   <button type="submit" className="cta-primary w-full justify-center sm:w-auto">
                     <Glyph type="link" />
-                    <span>Send Message</span>
+                    <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
                   </button>
                 </form>
               </div>
