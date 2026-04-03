@@ -327,6 +327,15 @@ function App() {
                   <Glyph type="link" />
                   <span>Contact Me</span>
                 </a>
+                <a
+                  href="https://drive.google.com/file/d/1bNpkQVQJGdBGM0Cdp7QThPJpxg4Foq38/view?usp=sharing"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="cta-secondary"
+                >
+                  <Glyph type="link" />
+                  <span>Resume</span>
+                </a>
               </div>
               
             </Motion.div>
