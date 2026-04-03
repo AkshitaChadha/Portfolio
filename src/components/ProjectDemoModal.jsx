@@ -3,10 +3,11 @@ import { AnimatePresence, motion as Motion } from 'framer-motion'
 function normalizeImages(images) {
   return images.map((image, index) =>
     typeof image === 'string'
-      ? { src: image, caption: `Demo screenshot ${index + 1}` }
+      ? { src: image, caption: `Demo screenshot ${index + 1}`, masks: [] }
       : {
           src: image.src,
           caption: image.caption ?? `Demo screenshot ${index + 1}`,
+          masks: image.masks ?? [],
         },
   )
 }
@@ -84,6 +85,18 @@ export function ProjectDemoModal({
                     alt={`${project.title} screenshot ${activeIndex + 1}`}
                     className="demo-image mx-auto h-[20rem] w-full object-contain sm:h-[28rem] lg:h-[34rem]"
                   />
+                  {activeImage.masks?.map((mask, index) => (
+                    <div
+                      key={`${activeImage.src}-mask-${index}`}
+                      className="image-mask"
+                      style={{
+                        left: mask.left,
+                        top: mask.top,
+                        width: mask.width,
+                        height: mask.height,
+                      }}
+                    />
+                  ))}
                 </div>
 
                 <div className="absolute inset-y-0 right-0 z-10 flex items-center pr-3 sm:pr-5">

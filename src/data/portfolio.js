@@ -35,7 +35,7 @@ export const projects = [
    
     images: [
       {
-        src: '/projects/nptel-result-system/overview.svg',
+        src: '/projects/nptel-result-system/Screenshot%202026-04-03%20150511.png',
         caption: 'Dashboard-style overview for bulk result evaluation and CSV processing.',
       },
       {
@@ -60,17 +60,49 @@ export const projects = [
     period: 'Real-Time Collaborative Coding Platform',
     tech: ['React', 'Node.js', 'Socket.io', 'Python', 'Streamlit'],
     github: 'https://github.com/AkshitaChadha/CodeVerseAI',
-    live: 'https://github.com/AkshitaChadha/CodeVerseAI',
+    live: 'https://codeverseai.streamlit.app/',
+    repositories: [
+      {
+        label: 'Editor',
+        detail: 'MERN + Socket.io',
+        href: 'https://github.com/AkshitaChadha/CodeVerseAI',
+      },
+      {
+        label: 'AI Dashboard',
+        detail: 'Streamlit + Python',
+        href: 'https://github.com/AkshitaChadha?tab=repositories',
+      },
+    ],
     demoType: 'screenshots',
     
     images: [
       {
-        src: '/projects/codeverse-ai/editor.svg',
-        caption: 'Collaborative editor view with multi-user presence and synchronized code changes.',
+        src:'/projects/codeverse-ai/Screenshot%202026-04-03%20134829.png',
+        caption: 'Collaborative editor landing view for the CodeVerse AI platform.',
       },
       {
-        src: '/projects/codeverse-ai/ai-panel.svg',
-        caption: 'AI-assisted workflow panel for code generation, debugging, and productivity support.',
+        src:'/projects/codeverse-ai/image.png',
+        caption: 'Real-time collaborative editor with synchronized sessions and shared workspace controls.',
+      },
+      {
+        src: '/projects/codeverse-ai/Screenshot%202026-04-03%20135356.png',
+        caption: 'Collaborative coding interface showing active files and live workspace layout.',
+      },
+      {
+        src: '/projects/codeverse-ai/Screenshot%202026-04-03%20140558.png',
+        caption: 'Editor-focused project view with structured navigation and coding workspace.',
+      },
+      {
+        src: '/projects/codeverse-ai/Screenshot%202026-04-03%20141554.png',
+        caption: 'AI dashboard section for assisted workflows and productivity-focused tooling.',
+      },
+      {
+        src: '/projects/codeverse-ai/Screenshot%202026-04-03%20141723.png',
+        caption: 'Streamlit-powered dashboard surface for AI-supported code assistance.',
+      },
+      {
+        src: '/projects/codeverse-ai/Screenshot%202026-04-03%20141815.png',
+        caption: 'Additional CodeVerse AI dashboard state highlighting the assistant workflow.',
       },
     ],
     description:
@@ -89,17 +121,45 @@ export const projects = [
     period: 'News Aggregation Web Application',
     tech: ['Django', 'Python', 'SQLite', 'BeautifulSoup', 'Bootstrap'],
     github: 'https://github.com/AkshitaChadha/News-Nexus',
-    live: null,
+    live: 'https://news-nexus-ia8c.onrender.com/',
     demoType: 'screenshots',
     
     images: [
       {
-        src: '/projects/news-nexus/home.svg',
-        caption: 'Landing page concept with categorized article feeds and editorial-style layout.',
+        src: '/projects/news-nexus/Screenshot%202026-04-03%20214129.png',
+        caption: 'Homepage with categorized news sections and the main editorial landing experience.',
       },
       {
-        src: '/projects/news-nexus/bookmarks.svg',
-        caption: 'Authenticated bookmarking experience showing saved stories and personalized access.',
+        src: '/projects/news-nexus/Screenshot%202026-04-03%20214255.png',
+        caption: 'Top headlines flow with categorized content and structured article browsing.',
+      },
+      {
+        src: '/projects/news-nexus/Screenshot%202026-04-03%20214352.png',
+        caption: 'Article listing experience showing organized news cards and category-driven discovery.',
+      },
+      {
+        src: '/projects/news-nexus/Screenshot%202026-04-03%20214441.png',
+        caption: 'Authenticated news browsing interface with personalized reading access.',
+      },
+      {
+        src: '/projects/news-nexus/Screenshot%202026-04-03%20214509.png',
+        caption: 'Saved and personalized content flow supporting returning users.',
+      },
+      {
+        src: '/projects/news-nexus/Screenshot%202026-04-03%20214833.png',
+        caption: 'User profile and personalization dashboard with preferences and saved-news controls.',
+        masks: [
+          {
+            left: '12.2%',
+            top: '39.5%',
+            width: '18%',
+            height: '4.8%',
+          },
+        ],
+      },
+      {
+        src: '/projects/news-nexus/Screenshot%202026-04-03%20214935.png',
+        caption: 'Additional personalized dashboard view highlighting the authenticated user experience.',
       },
     ],
     description:

@@ -182,6 +182,7 @@ function App() {
   })
   const [selectedProject, setSelectedProject] = useState(null)
   const [activeDemoIndex, setActiveDemoIndex] = useState(0)
+  const [openRepoProject, setOpenRepoProject] = useState(null)
 
   const handleChange = ({ target: { name, value } }) => {
     setFormData((current) => ({ ...current, [name]: value }))
@@ -201,11 +202,16 @@ function App() {
   const openProjectDemo = (project) => {
     setSelectedProject(project)
     setActiveDemoIndex(0)
+    setOpenRepoProject(null)
   }
 
   const closeProjectDemo = () => {
     setSelectedProject(null)
     setActiveDemoIndex(0)
+  }
+
+  const toggleRepoDropdown = (projectTitle) => {
+    setOpenRepoProject((current) => (current === projectTitle ? null : projectTitle))
   }
 
   const showNextDemoImage = () => {
@@ -522,12 +528,44 @@ function App() {
                       <ActionLink icon="image" onClick={() => openProjectDemo(project)}>
                         {project.demoType === 'screenshots' && project.images?.length ? 'View Demo' : 'Details'}
                       </ActionLink>
-                      {project.demoType !== 'screenshots' && project.live ? (
+                      {project.live ? (
                         <ActionLink href={project.live} icon="link">
                           Live Demo
                         </ActionLink>
                       ) : null}
-                      {project.github ? (
+                      {project.repositories?.length ? (
+                        <div className="repo-dropdown-wrap">
+                          <button
+                            type="button"
+                            onClick={() => toggleRepoDropdown(project.title)}
+                            className="action-button-secondary"
+                          >
+                            <span className="button-icon-wrap">
+                              <Glyph type="github" />
+                            </span>
+                            <span>GitHub</span>
+                            <span className={`repo-caret ${openRepoProject === project.title ? 'repo-caret-open' : ''}`}>
+                              v
+                            </span>
+                          </button>
+                          {openRepoProject === project.title ? (
+                            <div className="repo-dropdown-menu">
+                              {project.repositories.map((repository) => (
+                                <a
+                                  key={repository.label}
+                                  href={repository.href}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="repo-dropdown-item"
+                                >
+                                  <span className="font-medium text-white">{repository.label}</span>
+                                  <span className="text-slate-400">{repository.detail}</span>
+                                </a>
+                              ))}
+                            </div>
+                          ) : null}
+                        </div>
+                      ) : project.github ? (
                         <ActionLink href={project.github} icon="github" secondary>
                           GitHub
                         </ActionLink>
