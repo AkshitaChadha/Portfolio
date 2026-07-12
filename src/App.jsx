@@ -488,7 +488,7 @@ function App() {
                   </div>
                   <div className="flex items-start justify-between gap-4 border-b border-white/8 pb-4">
                     <dt className="text-slate-500">Current role</dt>
-                    <dd className="text-right text-white">Final Year CSE Student</dd>
+                    <dd className="text-right text-white">B.Tech CSE Graduate, 2026</dd>
                   </div>
                   <div className="flex items-start justify-between gap-4 border-b border-white/8 pb-4">
                     <dt className="text-slate-500">Primary stack</dt>
