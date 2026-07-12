@@ -375,7 +375,7 @@ function App() {
                   <span>Contact Me</span>
                 </a>
                 <a
-                  href="https://drive.google.com/file/d/1bNpkQVQJGdBGM0Cdp7QThPJpxg4Foq38/view?usp=sharing"
+                  href="https://drive.google.com/file/d/1jjkaE_DMTckUAImF5vUIdxWqf21S1Ai3/view?usp=sharing"
                   target="_blank"
                   rel="noreferrer"
                   className="cta-secondary"
