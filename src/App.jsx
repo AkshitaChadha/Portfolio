@@ -408,7 +408,7 @@ function App() {
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(125,211,252,0.16),transparent_58%)]" />
                     <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent" />
                     <Motion.img
-                      src="/akshita-portrait.png"
+                      src="/Akshita_Chadha_Photo.jpg"
                       alt="Portrait of Akshita Chadha"
                       className="absolute left-1/2 top-[-1.25rem] w-[96%] max-w-none -translate-x-1/2 object-contain sm:top-[-1.75rem] sm:w-[92%]"
                       animate={reduceMotion ? {} : { y: [0, -10, 0] }}
