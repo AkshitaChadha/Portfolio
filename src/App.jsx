@@ -320,7 +320,7 @@ function App() {
                 transition={{ duration: 0.45, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
                 className="mb-5 inline-flex rounded-full border border-white/12 bg-white/6 px-4 py-1.5 text-xs font-medium tracking-[0.3em] text-cyan-200 uppercase shadow-[0_0_0_1px_rgba(255,255,255,0.02)] backdrop-blur"
               >
-                Python Full Stack Developer
+                Software Engineer | Backend & Full-Stack Developer
               </Motion.p>
               <Motion.p
                 initial={reduceMotion ? false : { opacity: 0, y: 14 }}
@@ -357,12 +357,12 @@ function App() {
                 className="mt-6 space-y-4"
               >
                 <p className="max-w-xl text-base leading-8 text-slate-300 sm:text-[1.02rem]">
-                  From real-time collaborative platforms to automated evaluation systems, I enjoy
-                  turning complex workflows into clean, efficient products.
+                  From real-time collaboration platforms to automated evaluation systems, I enjoy turning complex
+                  ideas into reliable, user-focused software.
                 </p>
                 <p className="max-w-lg text-sm leading-7 text-slate-400 sm:text-[0.98rem]">
-                  Currently seeking opportunities as a Python Full Stack Developer where I can
-                  contribute, learn, and build impactful solutions.
+                  Currently seeking Software Engineer and Backend/Full-Stack Developer opportunities where I can 
+                  contribute, learn, and build impactful products.
                 </p>
               </Motion.div>
               <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
@@ -426,7 +426,7 @@ function App() {
                         Core focus
                       </p>
                       <p className="mt-3 text-lg font-medium text-white">
-                        Full stack web development powered by Python, Django, APIs, and real-time collaboration.
+                        Python • Django • React • Node.js • Flask • REST APIs • SQL • Git
                       </p>
                     </div>
                     <div className="mt-4 grid gap-3 sm:grid-cols-3">
@@ -454,8 +454,8 @@ function App() {
           <Reveal>
             <SectionHeading
               eyebrow="About"
-              title="Full stack development with strong engineering fundamentals."
-              description="I build Python-led web products that balance reliability, usability, and clarity. My work spans Django, Django REST Framework, frontend implementation, and scalable application design, while my speaking and anchoring experience helps me translate technical ideas into confident collaboration."
+              title="Building scalable software with strong engineering fundamentals."
+              description="I build full-stack applications with a focus on scalability, reliability, and clean software design. My experience spans Python, Django, React, Node.js, REST APIs, and real-time applications. Alongside engineering, my public speaking and leadership experience has strengthened my ability to communicate technical ideas and collaborate effectively within teams."
             />
           </Reveal>
 
@@ -665,8 +665,8 @@ function App() {
           <Reveal>
             <SectionHeading
               eyebrow="Contact"
-              title="Let's build thoughtful full stack products with real-world polish."
-              description="Open to internships, full-time roles, collaborations, and conversations around Python, Django, full stack development, developer tools, or product-focused engineering roles."
+              title="Let's build thoughtful products with real-world polish."
+              description="Open to internships, full-time roles, collaborations, and conversations around Python, Django, Software Engineering, Full stack development, developer tools, or product-focused engineering roles."
             />
           </Reveal>
 
