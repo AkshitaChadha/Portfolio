@@ -184,7 +184,50 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.08),
       inset 0 0 0 1px rgba(255, 255, 255, 0.03),
       inset 0 18px 40px rgba(56, 189, 248, 0.03);
-    @apply relative overflow-visible rounded-[2rem] border border-white/10 p-5 backdrop-blur-xl transition duration-300 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:border-cyan-300/30 hover:shadow-[0_36px_100px_rgba(30,41,59,0.4)] sm:p-6;
+    @apply relative flex w-full overflow-visible rounded-[2rem] border border-white/10 p-5 backdrop-blur-xl transition duration-300 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:border-cyan-300/30 hover:shadow-[0_36px_100px_rgba(30,41,59,0.4)] sm:min-h-[39.5rem] sm:p-6;
+  }
+
+  .project-rail-shell {
+    @apply relative;
+  }
+
+  .project-rail {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    @apply flex items-stretch snap-x snap-mandatory gap-5 overflow-x-auto overflow-y-visible px-14 pb-3;
+  }
+
+  .project-rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .project-rail-item {
+    flex: 0 0 clamp(18.5rem, 31vw, 24rem);
+    scroll-snap-align: start;
+    @apply flex;
+  }
+
+  .project-rail-button {
+    @apply absolute top-1/2 z-20 inline-flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/12 bg-slate-950/75 text-lg text-slate-100 backdrop-blur-xl transition duration-300 ease-out hover:scale-[1.04] hover:border-cyan-300/30 hover:bg-white/10 hover:text-white;
+    box-shadow:
+      0 14px 32px rgba(15, 23, 42, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .project-rail-button-left {
+    @apply -left-6;
+  }
+
+  .project-rail-button-right {
+    @apply -right-6;
+  }
+
+  .project-rail-button-disabled {
+    @apply cursor-not-allowed border-white/8 text-slate-500 opacity-45 hover:scale-100 hover:border-white/8 hover:bg-slate-950/75 hover:text-slate-500;
+  }
+
+  .project-status-badge {
+    @apply inline-flex items-center rounded-full border border-emerald-300/18 bg-emerald-400/10 px-3 py-1 text-[0.68rem] font-medium tracking-[0.22em] text-emerald-200 uppercase;
   }
 
   .project-card::before {
@@ -243,6 +286,26 @@
   @media (max-width: 640px) {
     .section-shell {
       @apply py-20;
+    }
+
+    .project-rail {
+      @apply px-0;
+    }
+
+    .project-rail-item {
+      flex-basis: min(88vw, 22rem);
+    }
+
+    .project-rail-button {
+      @apply top-auto bottom-[-3.6rem] translate-y-0;
+    }
+
+    .project-rail-button-left {
+      @apply left-1/2 -translate-x-[3.35rem];
+    }
+
+    .project-rail-button-right {
+      @apply right-1/2 translate-x-[3.35rem];
     }
   }
 

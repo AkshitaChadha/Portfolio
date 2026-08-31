@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion as Motion, useReducedMotion } from 'framer-motion'
 import { ProjectDemoModal } from './components/ProjectDemoModal'
 import { Reveal } from './components/Reveal'
@@ -177,6 +177,7 @@ function ActionLink({ href, icon, children, secondary = false, onClick }) {
 
 function App() {
   const reduceMotion = useReducedMotion()
+  const projectsRailRef = useRef(null)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -190,6 +191,10 @@ function App() {
   const [selectedProject, setSelectedProject] = useState(null)
   const [activeDemoIndex, setActiveDemoIndex] = useState(0)
   const [openRepoProject, setOpenRepoProject] = useState(null)
+  const [projectRailState, setProjectRailState] = useState({
+    canScrollLeft: false,
+    canScrollRight: true,
+  })
 
   const handleChange = ({ target: { name, value } }) => {
     setFormData((current) => ({ ...current, [name]: value }))
@@ -260,6 +265,51 @@ function App() {
   const toggleRepoDropdown = (projectTitle) => {
     setOpenRepoProject((current) => (current === projectTitle ? null : projectTitle))
   }
+
+  const scrollProjects = (direction) => {
+    const rail = projectsRailRef.current
+
+    if (!rail) {
+      return
+    }
+
+    const firstCard = rail.querySelector('[data-project-card]')
+    const scrollAmount = firstCard
+      ? firstCard.getBoundingClientRect().width + 20
+      : rail.clientWidth * 0.85
+
+    rail.scrollBy({
+      left: direction === 'right' ? scrollAmount : -scrollAmount,
+      behavior: 'smooth',
+    })
+  }
+
+  useEffect(() => {
+    const rail = projectsRailRef.current
+
+    if (!rail) {
+      return undefined
+    }
+
+    const updateProjectRailState = () => {
+      const maxScrollLeft = rail.scrollWidth - rail.clientWidth
+      const threshold = 8
+
+      setProjectRailState({
+        canScrollLeft: rail.scrollLeft > threshold,
+        canScrollRight: rail.scrollLeft < maxScrollLeft - threshold,
+      })
+    }
+
+    updateProjectRailState()
+    rail.addEventListener('scroll', updateProjectRailState, { passive: true })
+    window.addEventListener('resize', updateProjectRailState)
+
+    return () => {
+      rail.removeEventListener('scroll', updateProjectRailState)
+      window.removeEventListener('resize', updateProjectRailState)
+    }
+  }, [])
 
   const showNextDemoImage = () => {
     if (!selectedProject?.images?.length) {
@@ -544,93 +594,120 @@ function App() {
             />
           </Reveal>
 
-          <div className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-3 xl:auto-rows-fr">
-            {projects.map((project, index) => (
-              <Reveal key={project.title} delay={0.1 * index} className="h-full">
-                <article className="project-card h-full">
-                  <div className="flex h-full flex-col">
-                    {project.images?.[0] ? (
-                      <button
-                        type="button"
-                        onClick={() => openProjectDemo(project)}
-                        className="project-card-thumb group"
-                      >
-                        <img
-                          src={typeof project.images[0] === 'string' ? project.images[0] : project.images[0].src}
-                          alt={`${project.title} preview`}
-                          className="project-card-thumb-image"
-                        />
-                        <div className="project-card-thumb-overlay" />
-                      </button>
-                    ) : null}
-                    <div className="flex flex-wrap items-center gap-3">
-                      
-                      <span className="text-sm text-slate-500">{project.period}</span>
-                    </div>
-                    <h3 className="mt-4 text-2xl font-semibold tracking-[-0.05em] text-white">
-                      {project.title}
-                    </h3>
-                    <p className="project-summary mt-3 text-sm leading-7 text-slate-300">
-                      {project.description}
-                    </p>
-                    <div className="mt-5 flex flex-wrap gap-2.5">
-                      {project.tech.map((item) => (
-                        <span key={item} className="chip">
-                          {item}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="mt-auto flex flex-wrap gap-3 pt-5">
-                      <ActionLink icon="image" onClick={() => openProjectDemo(project)}>
-                        {project.demoType === 'screenshots' && project.images?.length ? 'View Demo' : 'Details'}
-                      </ActionLink>
-                      {project.live ? (
-                        <ActionLink href={project.live} icon="link">
-                          Live Demo
-                        </ActionLink>
+          <div className="project-rail-shell mt-6">
+            <button
+              type="button"
+              onClick={() => scrollProjects('left')}
+              className={`project-rail-button project-rail-button-left ${projectRailState.canScrollLeft ? '' : 'project-rail-button-disabled'}`}
+              aria-label="Scroll projects left"
+              disabled={!projectRailState.canScrollLeft}
+            >
+              <span aria-hidden="true">←</span>
+            </button>
+
+            <div
+              ref={projectsRailRef}
+              className="project-rail"
+            >
+              {projects.map((project, index) => (
+                <Reveal key={project.title} delay={0.08 * index} className="project-rail-item h-full">
+                  <article className="project-card h-full" data-project-card>
+                    <div className="flex h-full flex-col">
+                      {project.images?.[0] ? (
+                        <button
+                          type="button"
+                          onClick={() => openProjectDemo(project)}
+                          className="project-card-thumb group"
+                        >
+                          <img
+                            src={typeof project.images[0] === 'string' ? project.images[0] : project.images[0].src}
+                            alt={`${project.title} preview`}
+                            className="project-card-thumb-image"
+                          />
+                          <div className="project-card-thumb-overlay" />
+                        </button>
                       ) : null}
-                      {project.repositories?.length ? (
-                        <div className="repo-dropdown-wrap">
-                          <button
-                            type="button"
-                            onClick={() => toggleRepoDropdown(project.title)}
-                            className="action-button-secondary"
-                          >
-                            <span className="button-icon-wrap">
-                              <Glyph type="github" />
-                            </span>
-                            <span>GitHub</span>
-                            <span className={`repo-caret ${openRepoProject === project.title ? 'repo-caret-open' : ''}`}>
-                              v
-                            </span>
-                          </button>
-                          {openRepoProject === project.title ? (
-                            <div className="repo-dropdown-menu">
-                              {project.repositories.map((repository) => (
-                                <a
-                                  key={repository.label}
-                                  href={repository.href}
-                                  target="_blank"
-                                  rel="noreferrer"
-                                  className="repo-dropdown-item"
-                                >
-                                  <span className="font-medium text-white">{repository.label}</span>
-                                  <span className="text-slate-400">{repository.detail}</span>
-                                </a>
-                              ))}
-                            </div>
-                          ) : null}
-                        </div>
-                      ) : project.github ? (
-                        <ActionLink href={project.github} icon="github" secondary>
-                          GitHub
+                      <div className="flex flex-wrap items-center gap-3">
+                        {project.status ? (
+                          <span className="project-status-badge">{project.status}</span>
+                        ) : null}
+                        <span className="text-sm text-slate-500">{project.period}</span>
+                      </div>
+                      <h3 className="mt-4 text-2xl font-semibold tracking-[-0.05em] text-white">
+                        {project.title}
+                      </h3>
+                      <p className="project-summary mt-3 text-sm leading-7 text-slate-300">
+                        {project.description}
+                      </p>
+                      <div className="mt-5 flex flex-wrap gap-2.5">
+                        {project.tech.map((item) => (
+                          <span key={item} className="chip">
+                            {item}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="mt-auto flex flex-wrap gap-3 pt-5">
+                        <ActionLink icon="image" onClick={() => openProjectDemo(project)}>
+                          {project.demoType === 'screenshots' && project.images?.length ? 'View Demo' : 'Details'}
                         </ActionLink>
-                      ) : null}
+                        {project.live ? (
+                          <ActionLink href={project.live} icon="link">
+                            Live Demo
+                          </ActionLink>
+                        ) : null}
+                        {project.repositories?.length ? (
+                          <div className="repo-dropdown-wrap">
+                            <button
+                              type="button"
+                              onClick={() => toggleRepoDropdown(project.title)}
+                              className="action-button-secondary"
+                            >
+                              <span className="button-icon-wrap">
+                                <Glyph type="github" />
+                              </span>
+                              <span>GitHub</span>
+                              <span className={`repo-caret ${openRepoProject === project.title ? 'repo-caret-open' : ''}`}>
+                                v
+                              </span>
+                            </button>
+                            {openRepoProject === project.title ? (
+                              <div className="repo-dropdown-menu">
+                                {project.repositories.map((repository) => (
+                                  <a
+                                    key={repository.label}
+                                    href={repository.href}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="repo-dropdown-item"
+                                  >
+                                    <span className="font-medium text-white">{repository.label}</span>
+                                    <span className="text-slate-400">{repository.detail}</span>
+                                  </a>
+                                ))}
+                              </div>
+                            ) : null}
+                          </div>
+                        ) : project.github ? (
+                          <ActionLink href={project.github} icon="github" secondary>
+                            GitHub
+                          </ActionLink>
+                        ) : null}
+                      </div>
                     </div>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
+                  </article>
+                </Reveal>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={() => scrollProjects('right')}
+              className={`project-rail-button project-rail-button-right ${projectRailState.canScrollRight ? '' : 'project-rail-button-disabled'}`}
+              aria-label="Scroll projects right"
+              disabled={!projectRailState.canScrollRight}
+            >
+              <span aria-hidden="true">→</span>
+            </button>
           </div>
         </section>
 

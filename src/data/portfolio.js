@@ -25,6 +25,41 @@ export const skills = [
 
 export const projects = [
   {
+    title: 'RefactorIQ',
+    slug: 'refactoriq',
+    period: 'AI-Powered Technical Debt Analysis & Refactoring Roadmap',
+    status: 'Ongoing',
+    tech: ['Python', 'FastAPI', 'AST', 'Ruff', 'Git'],
+    github: 'https://github.com/AkshitaChadha/TechDebtAnalyzer',
+    live: '',
+    demoType: 'screenshots',
+
+    images: [
+      {
+        src: '/projects/techdebtanalyzer/Screenshot 2026-08-31 151402.png',
+        caption:
+          'FastAPI interface exposing the RefactorIQ repository analysis endpoint.',
+      },
+      {
+        src: '/projects/techdebtanalyzer/Screenshot 2026-08-31 151424.png',
+        caption:
+          'Repository analysis producing a prioritized refactoring roadmap based on code complexity and Git change activity.',
+      },
+    ],
+
+    description:
+      'An ongoing codebase analysis platform that identifies high-risk technical debt and generates a prioritized refactoring roadmap using static analysis, cyclomatic complexity, and Git change activity.',
+
+    impact:
+      'Aggregates function-level code metrics into file-level technical debt signals, helping developers identify which parts of a repository should be refactored first.',
+
+    highlights: [
+      'Built a multi-stage Python analysis pipeline combining AST-based entity extraction, cyclomatic complexity analysis, Ruff findings, and Git churn.',
+      'Implemented repository-level aggregation to convert function metrics into file-level maintainability and change-risk signals.',
+      'Developed a deterministic priority engine that ranks files and generates a refactoring roadmap based on complexity, issues, and change activity.',
+    ],
+  },
+  {
     title: 'NPTEL Result Evaluation System',
     slug: 'nptel-result-system',
     period: 'Academic Project',
@@ -39,7 +74,7 @@ export const projects = [
         caption: 'Dashboard-style overview for bulk result evaluation and CSV processing.',
       },
       {
-        src: '/projects/nptel-result-system/report.svg',
+        src: '/projects/nptel-result-system/Screenshot 2026-04-20 003709.png',
         caption: 'Result publishing flow with automated routing and PDF report generation.',
       },
     ],
